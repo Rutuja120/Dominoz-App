@@ -1,0 +1,42 @@
+{% extends 'dominozapp/base.html' %}
+{% block title %} Pizza List {% endblock %}
+{% block content %}
+<style>
+    /* Custom CSS for Pizza List */
+    .pizza-list-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .pizza-list-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+    .pizza-list-container .list-group-item {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+        margin-bottom: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .pizza-list-container .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="container pizza-list-container">
+    <h2>List of Pizzas</h2>
+    <div class="list-group">
+        {% for pizza in pizzas %}
+            <a href="{% url 'pizza_detail' pizza.pk %}" class="list-group-item list-group-item-action">{{ pizza.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'dominozapp/base.html' %}
+{% block title %} Drink List {% endblock %}
+{% block content %}
+<style>
+    /* Custom CSS for Drink List */
+    .drink-list-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .drink-list-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+    .drink-list-container .list-group-item {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+        margin-bottom: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .drink-list-container .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="container drink-list-container">
+    <h2 class="my-4">List of drinks</h2>
+    <div class="list-group">
+        {% for drink in drinks %}
+            <a href="{% url 'drink_detail' drink.pk %}" class="list-group-item list-group-item-action">{{ drink.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

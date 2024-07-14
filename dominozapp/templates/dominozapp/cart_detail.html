@@ -1,0 +1,83 @@
+{% extends 'dominozapp/base.html' %}
+{% block title %} MyCart {% endblock %}
+{% block content %}
+<style>
+    .cart-details {
+        margin: 20px 0;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item-name {
+        font-size: 1.2rem;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+    }
+
+    .quantity-control a {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .quantity-control a:hover {
+        background-color: #0056b3;
+    }
+
+    .total-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .checkout-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .checkout-btn:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="container cart-details">
+    <h2 class="my-4">Cart Details</h2>
+    <ul class="list-group">
+        {% for item in cart_items %}
+            <li class="cart-item list-group-item">
+                <span class="cart-item-name">{{ item.get_item_name }} - {{ item.quantity }}</span>
+                <div class="quantity-control">
+                    <a href="{% url 'increase_quantity' item.id %}">+</a>
+                    <a href="{% url 'decrease_quantity' item.id %}">-</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2 class="total-amount">Total: {{ total }}</h2>
+    <a href="{% url 'order_create' %}" class="checkout-btn">Proceed To Checkout</a>
+</div>
+{% endblock %}
